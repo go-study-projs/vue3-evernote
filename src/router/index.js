@@ -9,11 +9,11 @@ const routes = [
     path: '/login',
     component:_=>import('@/components/Login')
   },
-  // {
-  //   path: '/notebooks',
-  //   component: _ => import('@/components/Test'),
-  //   meta: { needLogin: true }
-  // },
+  {
+    path: '/notebooks',
+    component: _ => import('@/components/Test'),
+    meta: { needLogin: true }
+  },
 ]
 
 const router = createRouter({
