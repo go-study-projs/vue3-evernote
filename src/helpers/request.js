@@ -1,6 +1,7 @@
 import axios from 'axios'
 import baseURLConfig from './config-baseURL'
 import { ElMessage } from 'element-plus'
+import router from '../router'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.baseURL = baseURLConfig.baseURL
@@ -56,7 +57,8 @@ export default function request(url, type = 'GET', data = {}) {
           // 说明 token 验证失败
           // 可以直接跳转到登录页面，重新登录获取 token
           ElMessage.error('请重新登陆')
-          location.href = '/login'
+          // location.href = '/login'
+          router.push('/login')
         }
       })
       .catch(res => {

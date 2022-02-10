@@ -76,11 +76,6 @@ export default {
       isError: false
     })
 
-    // methods
-    // const registerUser = (payload) => store.dispatch('register',...payload)
-
-    const loginUser = (payload) => store.dispatch('login',...payload)
-
     const onRegister = () => {
       const {username, password} = register
       if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(username)) {
