@@ -1,5 +1,5 @@
 import Notebooks from '@/apis/notebooks'
-// import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 
 const state = {
   notebooks: null,
@@ -59,23 +59,21 @@ const actions = {
   addNotebook({ commit }, { title }) {
     return Notebooks.addNotebook({ title }).then(res => {
       commit('addNotebook', { notebook: res.data })
-      // todo Message.success(res.msg)
-      window.alert(res.msg)
+      ElMessage.success(res.msg)
     })
   },
 
   updateNotebook({ commit }, { notebookId, title }) {
     return Notebooks.updateNotebook(notebookId, { title }).then(res => {
       commit('updateNotebook', { notebookId, title })
-      // todo Message.success(res.msg)
-      window.alert(res.msg)
+      ElMessage.success(res.msg)
     })
   },
 
   deleteNotebook({ commit }, { notebookId }) {
     return Notebooks.deleteNotebook(notebookId).then(res => {
       commit('deleteNotebook', { notebookId })
-      Message.success(res.msg)
+      ElMessage.success(res.msg)
     })
   }
 }

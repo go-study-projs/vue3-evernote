@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/notebooks',
-    component: _ => import('@/components/Test'),
+    component: _ => import('@/components/NotebookList'),
     meta: { needLogin: true }
   },
 ]
