@@ -1,4 +1,4 @@
-import filters from '@/helpers/filter'
+// import filters from '@/helpers/filter'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -28,5 +28,9 @@ app.use(ElButton)
 app.use(ElDropdown)
 app.use(ElDropdownMenu)
 app.use(ElDropdownItem)
+
+app.config.globalProperties.$elMessage = ElMessage
+app.config.globalProperties.$confirm = ElMessageBox.confirm
+app.config.globalProperties.$prompt = ElMessageBox.prompt
 
 app.use(store).use(router).mount('#app')
