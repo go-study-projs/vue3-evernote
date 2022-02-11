@@ -18,7 +18,8 @@ module.exports = {
     'quotes': ['error', 'single'],
     'no-extra-semi': 0,
     'no-unused-vars': 0,
-    'newline-per-chained-call': 'off'
+    'newline-per-chained-call': 'off',
+    "vue/valid-template-root": "off",
   },
   globals: {
     __BASE_URL__: true
