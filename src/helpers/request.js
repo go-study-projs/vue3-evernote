@@ -1,6 +1,6 @@
 import axios from 'axios'
 import baseURLConfig from './config-baseURL'
-import { ElMessage } from 'element-plus'
+import {ElMessage} from 'element-plus'
 import router from '../router'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -58,13 +58,12 @@ export default function request(url, type = 'GET', data = {}) {
           // 可以直接跳转到登录页面，重新登录获取 token
           ElMessage.error('请重新登陆')
           // location.href = '/login'
-          router.push('/login')
+          return router.push('/login')
         }
       })
       .catch(res => {
-        console.log(res)
         ElMessage.error('网络异常')
-        reject({ msg: '网络异常' })
+        reject({msg: '网络异常'})
       })
   })
 }

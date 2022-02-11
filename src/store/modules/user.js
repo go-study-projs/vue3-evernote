@@ -25,7 +25,6 @@ const actions = {
   },
 
   register({ commit }, { username, password }) {
-    console.log(2323,username,password)
     return Auth.register({ username, password }).then(res => {
       localStorage.setItem('auth-token', res.data.token)
       commit('setUser', { user: res.data })
