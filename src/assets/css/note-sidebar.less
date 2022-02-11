@@ -1,0 +1,56 @@
+.note-sidebar {
+    position: relative;
+    width: 290px;
+    border-right: 1px solid #ccc;
+    background-color: #eee;
+    .add-note {
+        position: absolute;
+        top: 8px;
+        right: 5px;
+        z-index: 1;
+    }
+    .notebook-title {
+        display: block;
+        font-size: 18px;
+        font-weight: 400;
+        color: #333;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+        background-color: #f7f7f7;
+    }
+    .menu {
+        display: flex;
+        div {
+            font-size: 12px;
+            padding: 2px 10px;
+            flex: 1;
+            border-bottom: 1px solid #ccc;
+            &:first-child {
+                border-right: 1px solid #ccc;
+            }
+        }
+    }
+    .notes {
+        li {
+            &:nth-child(odd) {
+                background-color: #fdfdfd;
+            }
+            .router-link-exact-active {
+                border: 1px solid #81c0f3;
+                border-radius: 3px;
+            }
+            a {
+                display: flex;
+                padding: 3px 0;
+                font-size: 12px;
+                border: 2px solid transparent;
+            }
+            span {
+                padding: 0 10px;
+                flex: 1;
+            }
+        }
+    }
+}
