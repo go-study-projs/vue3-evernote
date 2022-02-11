@@ -14,6 +14,16 @@ const routes = [
     component: _ => import('@/components/NotebookList'),
     meta: { needLogin: true }
   },
+  {
+    path: '/note',
+    component: _ => import('@/components/NoteDetail'),
+    meta: { needLogin: true }
+  },
+  {
+    path: '/trash',
+    component: _ => import('@/components/TrashDetail'),
+    meta: { needLogin: true }
+  },
 ]
 
 const router = createRouter({

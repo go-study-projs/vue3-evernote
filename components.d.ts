@@ -5,11 +5,17 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Avatar: typeof import('./src/components/Avatar.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElDropdown: typeof import('element-plus/es')['ElDropdown']
+    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
+    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Login: typeof import('./src/components/Login.vue')['default']
     NotebookList: typeof import('./src/components/NotebookList.vue')['default']
+    NoteDetail: typeof import('./src/components/NoteDetail.vue')['default']
+    NoteSidebar: typeof import('./src/components/NoteSidebar.vue')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
-    Test: typeof import('./src/components/Test.vue')['default']
+    TrashDetail: typeof import('./src/components/TrashDetail.vue')['default']
   }
 }
 
