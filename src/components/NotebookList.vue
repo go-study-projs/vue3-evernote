@@ -26,7 +26,7 @@
               <span class="action" @click.stop.prevent="onEdit(notebook)">
                 编辑
               </span>
-              <span class="date">{{ notebook.createdAt | friendlyDate }}</span>
+              <span class="date">{{ $filters.friendlyDate(notebook.createdAt) }}</span>
             </div>
           </router-link>
         </div>
