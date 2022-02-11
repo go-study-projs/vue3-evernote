@@ -3,27 +3,21 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css';
+import '@/assets/css/fix-element-bug.less'
 
 import {
+  ElButton,
   ElDropdown,
   ElDropdownMenu,
   ElDropdownItem,
   ElMessage,
-  ElMessageBox,
-  ElButton
+  ElMessageBox
 } from 'element-plus'
 
-// 全局过滤器
-/*
-for (let key in filters) {
-  Vue.filter(key, filters[key])
-}
-*/
 
 const app = createApp(App)
 
-app.use(ElementPlus)
 app.use(ElButton)
 app.use(ElDropdown)
 app.use(ElDropdownMenu)
