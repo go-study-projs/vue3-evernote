@@ -42,7 +42,7 @@ import {getCurrentInstance, computed} from 'vue'
 export default {
   name: 'notebookList',
   setup(){
-    const {confirm,prompt} = getCurrentInstance()
+    const {$confirm,$prompt} = getCurrentInstance().appContext.config.globalProperties
     const store = useStore()
 
     // created
@@ -50,7 +50,7 @@ export default {
 
     // methods
     const onCreate = () => {
-      prompt('请输入笔记本标题', '新建笔记本', {
+      $prompt('请输入笔记本标题', '新建笔记本', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputPattern: /^.{1,30}$/,
@@ -61,7 +61,7 @@ export default {
     }
 
     const onEdit = (notebook) => {
-      prompt('请输入新的笔记本标题', '编辑笔记本', {
+      $prompt('请输入新的笔记本标题', '编辑笔记本', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputPattern: /^.{1,30}$/,
@@ -73,7 +73,7 @@ export default {
     }
 
     const onDelete = (notebook) => {
-      confirm(`是否删除笔记本 ${notebook.title} ?`, '提示', {
+      $confirm(`是否删除笔记本 ${notebook.title} ?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

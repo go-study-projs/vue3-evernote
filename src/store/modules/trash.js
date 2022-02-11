@@ -1,5 +1,5 @@
 import Trash from '@/apis/trash'
-// import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 
 const state = {
   trashNotes: null,
@@ -66,16 +66,14 @@ const actions = {
   deleteTrashNote({ commit }, { noteId }) {
     return Trash.deleteNote({ noteId }).then(res => {
       commit('deleteTrashNote', { noteId })
-      // todo Message.success(res.msg)
-      window.alert(res.msg)
+      ElMessage.success(res.msg)
     })
   },
 
   revertTrashNote({ commit }, { noteId }) {
     return Trash.revertNote({ noteId }).then(res => {
       commit('deleteTrashNote', { noteId })
-      // todo Message.success(res.msg)
-      window.alert(res.msg)
+      ElMessage.success(res.msg)
     })
   }
 }
