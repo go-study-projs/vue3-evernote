@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar">
-    <avatar></avatar>
+    <Avatar />
     <div class="icons">
       <router-link to="/note" title="笔记">
         <i class="iconfont icon-note"></i>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import avatar from '@/components/Avatar'
+import {Avatar} from '@/components/Avatar.jsx'
 import { useStore } from 'vuex'
 
 const store = useStore()
