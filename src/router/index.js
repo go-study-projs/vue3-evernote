@@ -7,7 +7,7 @@ const routes = [
   },
   {
     path: '/login',
-    component:_=>import('@/components/Login')
+    component:_=>import('@/components/Login.jsx')
   },
   {
     path: '/notebooks',
@@ -23,7 +23,7 @@ const routes = [
     path: '/trash',
     component: _ => import('@/components/TrashDetail'),
     meta: { needLogin: true }
-  },
+  }
 ]
 
 const router = createRouter({
