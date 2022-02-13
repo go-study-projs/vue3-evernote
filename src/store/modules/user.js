@@ -2,7 +2,7 @@ import Auth from '@/apis/auth'
 import router from '@/router'
 
 const state = {
-  user: null
+  user: JSON.parse(localStorage.getItem('user-info')) || null
 }
 
 const getters = {
@@ -20,6 +20,7 @@ const actions = {
   login({ commit }, { username, password }) {
     return Auth.login({ username, password }).then(res => {
       localStorage.setItem('auth-token', res.data.token)
+      localStorage.setItem('user-info', JSON.stringify({username}))
       commit('setUser', { user: res.data })
     })
   },
@@ -27,6 +28,7 @@ const actions = {
   register({ commit }, { username, password }) {
     return Auth.register({ username, password }).then(res => {
       localStorage.setItem('auth-token', res.data.token)
+      localStorage.setItem('user-info', JSON.stringify({username}))
       commit('setUser', { user: res.data })
     })
   },
@@ -34,6 +36,7 @@ const actions = {
   logout({ commit }, payload = { path: '/login' }) {
     commit('setUser', { user: null })
     localStorage.setItem('auth-token', '')
+    localStorage.setItem('user-info', '')
     router.push(payload)
   }
 
