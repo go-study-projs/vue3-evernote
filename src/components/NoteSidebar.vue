@@ -45,7 +45,7 @@
 <script setup>
 import { useRouter, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed,unref } from 'vue';
 
 const store = useStore();
 const router = useRouter();
@@ -65,15 +65,15 @@ store
     store.commit('setCurrentBookId', {
       currentNotebookId: route.query.notebookId,
     });
-    return store.dispatch('getNotes', { notebookId: currentNotebook.value.id });
+    return store.dispatch('getNotes', { notebookId: unref(currentNotebook).id });
   })
   .then((_) => {
     store.commit('setCurrentNoteId', { currentNoteId: route.query.noteId });
     router.replace({
       path: '/note',
       query: {
-        notebookId: currentNotebook.value.id,
-        noteId: currentNote.value.id,
+        notebookId: unref(currentNotebook).id,
+        noteId: unref(currentNote).id,
       },
     });
   });
@@ -81,7 +81,7 @@ store
 // methods
 const onAddNote = () => {
   store
-    .dispatch('addNote', { notebookId: currentNotebook.value.id })
+    .dispatch('addNote', { notebookId: unref(currentNotebook).id })
     .then((noteId) => {
       store.commit('setCurrentNoteId', { currentNoteId: noteId });
     });
@@ -97,8 +97,8 @@ const handleCommand = (notebookId) => {
     router.replace({
       path: '/note',
       query: {
-        notebookId: currentNotebook.value.id,
-        noteId: currentNote.value.id,
+        notebookId: unref(currentNotebook).id,
+        noteId: unref(currentNote).id,
       },
     });
   });

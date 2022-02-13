@@ -47,7 +47,7 @@
 import MarkdownIt from 'markdown-it';
 import { useStore } from 'vuex';
 import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
-import { computed, getCurrentInstance } from 'vue';
+import { computed, getCurrentInstance, unref } from 'vue';
 
 const md = new MarkdownIt();
 
@@ -69,7 +69,7 @@ store.dispatch('getTrashNotes').then((_) => {
   router.replace({
     path: '/trash',
     query: {
-      noteId: currentTrashNote.value.id,
+      noteId: unref(currentTrashNote).id,
     },
   });
 });
@@ -77,20 +77,20 @@ store.dispatch('getTrashNotes').then((_) => {
 // methods
 const onDelete = () => {
   const note = currentTrashNote;
-  $confirm(`删除笔记 ${note.value.title} 后将无法恢复`, '确定删除？', {
+  $confirm(`删除笔记 ${unref(note).title} 后将无法恢复`, '确定删除？', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
   })
     .then((_) => {
-      return store.dispatch('deleteTrashNote', { noteId: note.value.id });
+      return store.dispatch('deleteTrashNote', { noteId: unref(note).id });
     })
     .then((_) => {
       store.commit('setCurrentTrashNoteId');
       router.replace({
         path: '/trash',
         query: {
-          noteId: currentTrashNote.value.id,
+          noteId: unref(currentTrashNote).id,
         },
       });
     })
@@ -100,13 +100,13 @@ const onDelete = () => {
 };
 const onRevert = () => {
   store
-    .dispatch('revertTrashNote', { noteId: currentTrashNote.value.id })
+    .dispatch('revertTrashNote', { noteId: unref(currentTrashNote).id })
     .then((_) => {
       store.commit('setCurrentTrashNoteId');
       router.replace({
         path: '/trash',
         query: {
-          noteId: currentTrashNote.value.id,
+          noteId: unref(currentTrashNote).id,
         },
       });
     });
@@ -114,7 +114,7 @@ const onRevert = () => {
 
 // computed
 const compiledMarkdown = computed(() =>
-  md.render(currentTrashNote.value.content || ''),
+  md.render(unref(currentTrashNote).content || ''),
 );
 
 onBeforeRouteUpdate((to, from, next) => {
