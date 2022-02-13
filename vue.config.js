@@ -19,6 +19,9 @@ module.exports = {
     // https://cli.vuejs.org/zh/config/#devserver
   },
   assetsDir: 'static',
+  css: {
+    requireModuleExtension: true
+  },
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
