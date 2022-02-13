@@ -9,14 +9,14 @@
             <transition name="slide">
               <div :class="{ show: isShowRegister }" class="register">
                 <input
-                    type="text"
-                    v-model="register.username"
-                    placeholder="用户名"
+                  type="text"
+                  v-model="register.username"
+                  placeholder="用户名"
                 />
                 <input
-                    type="password"
-                    v-model="register.password"
-                    placeholder="密码"
+                  type="password"
+                  v-model="register.password"
+                  placeholder="密码"
                 />
                 <p :class="{ error: register.isError }">
                   {{ register.notice }}
@@ -27,8 +27,16 @@
             <h3 @click="showLogin">登录</h3>
             <transition name="slide">
               <div :class="{ show: isShowLogin }" class="login">
-                <input type="text" v-model="login.username" placeholder="输入用户名"/>
-                <input type="password" v-model="login.password" placeholder="密码"/>
+                <input
+                  type="text"
+                  v-model="login.username"
+                  placeholder="输入用户名"
+                />
+                <input
+                  type="password"
+                  v-model="login.password"
+                  placeholder="密码"
+                />
                 <p :class="{ error: login.isError }">{{ login.notice }}</p>
                 <div class="button" @click="onLogin">登录</div>
               </div>
@@ -40,125 +48,100 @@
   </div>
 </template>
 
-<script>
-import {useStore} from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
-import {ref, reactive, computed} from 'vue'
-// import setLocal from '../helpers/local'
+<script setup>
+import { useStore } from 'vuex';
+import { useRouter, useRoute } from 'vue-router';
+import { ref, reactive, computed } from 'vue';
 
-export default {
-  // components:{ElButton},
-  setup() {
+// store router hook
+const store = useStore();
 
-    // store router hook
-    const store = useStore()
+const router = useRouter();
 
-    const router = useRouter()
+const route = useRoute();
 
-    const route = useRoute()
+// data
+let isShowLogin = ref(true);
 
-    // data
-    let isShowLogin = ref(true)
+let isShowRegister = ref(false);
 
-    let isShowRegister = ref(false)
+let login = reactive({
+  username: '',
+  password: '',
+  notice: '输入用户名和密码',
+  isError: false,
+});
 
-    let login = reactive({
-      username: '',
-      password: '',
-      notice: '输入用户名和密码',
-      isError: false
-    })
+let register = reactive({
+  username: '',
+  password: '',
+  notice: '创建账号后，请记住用户名和密码',
+  isError: false,
+});
 
-    let register = reactive({
-      username: '',
-      password: '',
-      notice: '创建账号后，请记住用户名和密码',
-      isError: false
-    })
-
-    const onRegister = () => {
-      const {username, password} = register
-      if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(username)) {
-        register.isError = true
-        register.notice = '用户名3~15个字符，仅限于字母数字下划线中文'
-        return
-      }
-      if (!/^.{6,16}$/.test(password)) {
-        register.isError = true
-        register.notice = '密码长度为6~16个字符'
-        return
-      }
-      store.dispatch('register',{username, password})
-          .then(_ => {
-            login.isError = false
-            login.notice = ''
-            router.push({
-              path: 'notebooks'
-            })
-          })
-          .catch(data => {
-            login.isError = true
-            login.notice = data.msg
-          })
-    }
-
-    const onLogin = () => {
-      const {username, password} = login
-      if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(username)) {
-        login.isError = true
-        login.notice = '用户名3~15个字符，仅限于字母数字下划线中文'
-        return
-      }
-      if (!/^.{6,16}$/.test(password)) {
-        login.isError = true
-        login.notice = '密码长度为6~16个字符'
-        return
-      }
-      store.dispatch('login',{username, password})
-          .then(data => {
-            login.isError = false
-            login.notice = ''
-            router.push({
-              path: 'notebooks'
-            })
-          })
-          .catch(data => {
-            login.isError = true
-            login.notice = data.msg
-          })
-    }
-
-    const showLogin = () => {
-      isShowLogin.value = true
-      isShowRegister.value = false
-    }
-
-    const showRegister = () => {
-      isShowLogin.value = false
-      isShowRegister.value = true
-    }
-
-    return {
-      isShowRegister,
-      isShowLogin,
-      showLogin,
-      showRegister,
-      login,
-      register,
-      onLogin,
-      onRegister,
-    }
+const onRegister = () => {
+  const { username, password } = register;
+  if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(username)) {
+    register.isError = true;
+    register.notice = '用户名3~15个字符，仅限于字母数字下划线中文';
+    return;
   }
-  /*
-methods: {
-...mapActions({
-loginUser: 'login',
-registerUser: 'register'
-}),
-}
-   */
-}
+  if (!/^.{6,16}$/.test(password)) {
+    register.isError = true;
+    register.notice = '密码长度为6~16个字符';
+    return;
+  }
+  store
+    .dispatch('register', { username, password })
+    .then((_) => {
+      login.isError = false;
+      login.notice = '';
+      router.push({
+        path: 'notebooks',
+      });
+    })
+    .catch((data) => {
+      login.isError = true;
+      login.notice = data.msg;
+    });
+};
 
+const onLogin = () => {
+  const { username, password } = login;
+  if (!/^[\w\u4e00-\u9fa5]{3,15}$/.test(username)) {
+    login.isError = true;
+    login.notice = '用户名3~15个字符，仅限于字母数字下划线中文';
+    return;
+  }
+  if (!/^.{6,16}$/.test(password)) {
+    login.isError = true;
+    login.notice = '密码长度为6~16个字符';
+    return;
+  }
+  store
+    .dispatch('login', { username, password })
+    .then((data) => {
+      login.isError = false;
+      login.notice = '';
+      router.push({
+        path: 'notebooks',
+      });
+    })
+    .catch((data) => {
+      login.isError = true;
+      login.notice = data.msg;
+    });
+};
+
+const showLogin = () => {
+  isShowLogin.value = true;
+  isShowRegister.value = false;
+};
+
+const showRegister = () => {
+  isShowLogin.value = false;
+  isShowRegister.value = true;
+};
 </script>
 
 <style lang="less" scoped>
@@ -193,7 +176,9 @@ registerUser: 'register'
 
   .main {
     flex: 1;
-    background: #36bc64 url(//cloud.hunger-valley.com/17-12-13/38476998.jpg-middle) center center no-repeat;
+    background: #36bc64
+      url(//cloud.hunger-valley.com/17-12-13/38476998.jpg-middle) center center
+      no-repeat;
     background-size: contain;
   }
 

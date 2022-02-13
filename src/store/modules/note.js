@@ -65,7 +65,7 @@ const actions = {
   updateNote({ commit }, { noteId, title, content }) {
     return Note.updateNote({ noteId }, { title, content }).then(res => {
       commit('updateNote', { noteId, title, content })
-      ElMessage.success(res.msg)
+      // ElMessage.success(res.msg)
     })
   },
 

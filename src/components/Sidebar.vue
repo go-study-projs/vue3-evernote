@@ -18,21 +18,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import avatar from '@/components/Avatar'
 import { useStore } from 'vuex'
 
-export default {
-  components: { avatar },
-  setup(){
-    const store = useStore()
-    const onLogout = () => {
-      store.dispatch('logout')
-    }
-    return {
-      onLogout
-    }
-  },
+const store = useStore()
+const onLogout = () => {
+  store.dispatch('logout')
 }
 </script>
 

@@ -2,18 +2,13 @@
   <span :title="username">{{ slug }}</span>
 </template>
 
-<script>
+<script setup>
 import {computed} from 'vue'
 import {useStore} from 'vuex'
-export default {
-  setup(){
-    const store = useStore()
-    return {
-      username: computed(() => store.getters.username),
-      slug: computed(() => store.getters.slug)
-    }
-  },
-}
+
+const store = useStore()
+const username = computed(() => store.getters.username)
+const slug = computed(() => store.getters.slug)
 </script>
 
 <style scoped>
